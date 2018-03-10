@@ -7,7 +7,7 @@ from django.views.decorators.http import etag
 from .forms import ContactForm
 from django.contrib import messages
 from django.core.mail import send_mail
-import PIL
+from django.contrib.staticfiles.templatetags.staticfiles import static
 import hashlib
 
 def generate_etag(request,width,height):
@@ -27,8 +27,7 @@ def generate_image(request,width,height):
 	img =  Image.new("RGB", (width, height), hex2rgb(color))
 	draw = ImageDraw.Draw(img)
 	fontsize= (width*height)/((width+height)*5)
-	calibri=PIL.ImageFont.load_path("../static/fonts/calibri.ttf")
-	font = ImageFont.truetype(calibri, fontsize)
+	font = ImageFont.truetype(static("fonts/calibri.ttf"), fontsize)
 	text = request.GET['text'] if(request.GET.get("text",False)) \
 		else "{}x{}".format(width,height)
 	textWidth,textHeight = draw.textsize(text,font=font)
