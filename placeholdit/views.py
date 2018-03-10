@@ -26,7 +26,8 @@ def generate_image(request,width,height):
 	img =  Image.new("RGB", (width, height), hex2rgb(color))
 	draw = ImageDraw.Draw(img)
 	fontsize= (width*height)/((width+height)*5)
-	font = ImageFont.truetype("calibri.ttf", fontsize)
+	calibri=PIL.ImageFont.load_path("../static/fonts/calibri.ttf")
+	font = ImageFont.truetype(calibri, fontsize)
 	text = request.GET['text'] if(request.GET.get("text",False)) \
 		else "{}x{}".format(width,height)
 	textWidth,textHeight = draw.textsize(text,font=font)
