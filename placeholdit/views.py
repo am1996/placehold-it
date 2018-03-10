@@ -47,7 +47,9 @@ def sendContactMail(request):
 	if(contact.is_valid()):
 		message="""
 Name:{0}
+\n
 Email:{1}
+\n
 Message: {2}
 """.format(
 	request.POST.get("fullname",False),
