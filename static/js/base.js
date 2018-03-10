@@ -9,8 +9,8 @@ $("#gen-image").submit(function(event){
 	var height = document.getElementsByName("height")[0].value;
 	var color = document.getElementsByName("color")[0].value.replace("#","");
 	var text = document.getElementsByName("text")[0].value;
-	var res=`http://${window.location.hostname}:8000/${width}x${height}?color=${color}&text=${text}`;
-	if(text=="") res=`http://${window.location.hostname}:8000/${width}x${height}?color=${color}`;
+	var res=`http://${window.location.hostname}/${width}x${height}?color=${color}&text=${text}`;
+	if(text=="") res=`http://${window.location.hostname}/${width}x${height}?color=${color}`;
 	var copyText = document.getElementById("result");
 	document.getElementById("img").src=res;
 	copyText.value = res;
