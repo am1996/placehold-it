@@ -7,6 +7,7 @@ from django.views.decorators.http import etag
 from .forms import ContactForm
 from django.contrib import messages
 from django.core.mail import send_mail
+import PIL
 import hashlib
 
 def generate_etag(request,width,height):
