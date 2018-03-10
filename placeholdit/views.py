@@ -26,7 +26,7 @@ def generate_image(request,width,height):
 	img =  Image.new("RGB", (width, height), hex2rgb(color))
 	draw = ImageDraw.Draw(img)
 	fontsize= (width*height)/((width+height)*5)
-	font = ImageFont.truetype("../static/fonts/calibri.ttf", fontsize)
+	font = ImageFont.truetype("calibri.ttf", fontsize)
 	text = request.GET['text'] if(request.GET.get("text",False)) \
 		else "{}x{}".format(width,height)
 	textWidth,textHeight = draw.textsize(text,font=font)
@@ -46,7 +46,15 @@ def sendContactMail(request):
 	if(contact.is_valid()):
 		print(contact.cleaned_data)
 		send_mail("From PlaceholdIt",
-			request.POST.get("message",False), #message
+			"""
+			Name:{0}
+			Email:{1}
+			Message: {2}
+			""".format(
+				request.POST.get("fullname",False),
+				request.POST.get("email",False),
+				request.POST.get("message",False)
+			), #message
 			request.POST.get("email",False),   #sender
 			['mmogamer2.am@gmail.com'],
 			fail_silently=False
