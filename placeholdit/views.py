@@ -45,17 +45,17 @@ def generate_image(request,width,height):
 def sendContactMail(request):
 	contact = ContactForm(request.POST)
 	if(contact.is_valid()):
-		print(contact.cleaned_data)
+		message="""
+Name:{0}
+Email:{1}
+Message: {2}
+""".format(
+	request.POST.get("fullname",False),
+	request.POST.get("email",False),
+	request.POST.get("message",False)
+)
 		send_mail("From PlaceholdIt",
-			"""
-			Name:{0}
-			Email:{1}
-			Message: {2}
-			""".format(
-				request.POST.get("fullname",False),
-				request.POST.get("email",False),
-				request.POST.get("message",False)
-			), #message
+			message, #message
 			request.POST.get("email",False),   #sender
 			['mmogamer2.am@gmail.com'],
 			fail_silently=False
