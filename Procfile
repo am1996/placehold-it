@@ -1,1 +1,1 @@
-web: gunicorn placeholdit.wsgi --log-file -
+web: cd .. && gunicorn placeholdit.wsgi --log-file -
